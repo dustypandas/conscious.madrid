@@ -14,6 +14,7 @@
 			html, body {
 				width: 100%;
 				height:100%;
+				scroll-behavior: smooth;
 			}
 
 			.bg-light-container {
@@ -24,7 +25,6 @@
 				right: 0px;
 				z-index: 5;
 			}
-
 
 			.bg-light {
 				position: absolute;
@@ -147,40 +147,38 @@
 				left: 85%;
 			}
 
-			@-webkit-keyframes floatUp{
-				0%{top: 100vh; opacity: 0;}
-				25%{opacity: 1;}
-				50%{top: 0vh; opacity: .8;}
-				75%{opacity: 1;}
-				100%{top: -100vh; opacity: 0;}
+			@-webkit-keyframes floatUp {
+				0% { top: 100vh; opacity: 0; }
+				25% { opacity: 1;}
+				50% { top: 0vh; opacity: .8; }
+				75% { opacity: 1; }
+				100% { top: -100vh; opacity: 0; }
 			}
-			@-moz-keyframes floatUp{
-				0%{top: 100vh; opacity: 0;}
-				25%{opacity: 1;}
-				50%{top: 0vh; opacity: .8;}
-				75%{opacity: 1;}
-				100%{top: -100vh; opacity: 0;}
+			@-moz-keyframes floatUp {
+				0% { top: 100vh; opacity: 0; }
+				25% { opacity: 1;}
+				50% { top: 0vh; opacity: .8; }
+				75% { opacity: 1; }
+				100% { top: -100vh; opacity: 0; }
 			}
-			@-o-keyframes floatUp{
-				0%{top: 100vh; opacity: 0;}
-				25%{opacity: 1;}
-				50%{top: 0vh; opacity: .8;}
-				75%{opacity: 1;}
-				100%{top: -100vh; opacity: 0;}
+			@-o-keyframes floatUp {
+				0% { top: 100vh; opacity: 0; }
+				25% { opacity: 1;}
+				50% { top: 0vh; opacity: .8; }
+				75% { opacity: 1; }
+				100% { top: -100vh; opacity: 0; }
 			}
-			@keyframes floatUp{
-				0%{top: 100vh; opacity: 0;}
-				25%{opacity: 1;}
-				50%{top: 0vh; opacity: .8;}
-				75%{opacity: 1;}
-				100%{top: -100vh; opacity: 0;}
+			@keyframes floatUp {
+				0% { top: 100vh; opacity: 0; }
+				25% { opacity: 1;}
+				50% { top: 0vh; opacity: .8; }
+				75% { opacity: 1; }
+				100% { top: -100vh; opacity: 0; }
 			}
-
 			@keyframes rotate {
 				0% { rotate: 0deg; }
 				100% { rotate: -360deg; }
 			}
-
 			@keyframes shake {
 				0% { transform: translate(1px, 0) rotate(1deg); }
 				15% { transform: translate(-1px, 0) rotate(-1deg); }
@@ -189,7 +187,6 @@
 				60% { transform: translate(1px, 0) rotate(1deg); }
 				100% { transform: translate(1px, 0) rotate(1deg); }
 			}
-
 			@keyframes shake2 {
 				0% { transform: translate(1px, 0); }
 				15% { transform: translate(-1px, 0); }
@@ -198,61 +195,107 @@
 				60% { transform: translate(1px, 0); }
 				100% { transform: translate(1px, 0); }
 			}
+			/* @keyframes smoke {
+				0% {
+					opacity: 1;
+					filter: blur(0);
+					transform: translateX(0) translateY(0) rotate(0deg);
+				}
+				50% {
+					opacity: 1;
+					filter: blur(10px);
+					transform: translateX(0px) translateY(-150px) rotate(360deg) scale(1.5);
+				}
+				100% {
+					opacity: 0;
+					filter: blur(15px);
+					transform: translateX(0px) translateY(-300px) rotate(720deg) scale(3);
+				}
+			}
+			#welcome-word span {
+				display: inline-block;
+			}
+			#welcome-word span.active {
+				animation: smoke 5s linear forwards;
+				transform-origin: bottom;
+			} */
+			@keyframes smoke2 {
+				0% {
+					opacity: 1;
+					filter: blur(0);
+					transform: translateY(0) scale(1);
+				}
+				50% {
+					opacity: 1;
+					filter: blur(10px);
+					transform: translateY(-150px) scale(1.5);
+				}
+				100% {
+					opacity: 0;
+					filter: blur(15px);
+					transform: translateY(-300px) scale(3);
+				}
+			}
+
+			html {
+				background: #4e2e1c; /* bg-brown */
+			}
 
 			body {
 				width: 100%;
 				height: 100%;
 				margin: 0;
 				padding: 0;
-				background: #4e2e1c; /* bg-brown */
-				 /* #1c2d4e; bg-blue */
+				/* background: linear-gradient(#4e2e1c 50%, #1c2d4e 50%); */
+				/* background: #4e2e1c; bg-brown */
+				background: #1c2d4e; /* bg-blue */
+				font-family: Raleway;
+				font-size: 16pt;
+				color: white;
 			}
 
-			.bg-hero-container {
-				position: absolute;
-				top: 10px;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				z-index: 1;
+			.bg-blue {
+				background: #1c2d4e; /* bg-blue */
 			}
-			.bg-hero {
+			.bg-purple {
+				background: #4e1d4f; /* bg-purple */
+			}
+
+			.bg-image-container {
+				/* position: relative; */
+				width: 100vw;
+				height: 0;
+				overflow: visible;
+			}
+			.bg-image, .bg-image-cover {
 				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
+				width: 100vw;
+				height: 100vh;
 				z-index: 1;
 				background-size: cover;
 				background-position: center;
 			}
-			/* .bg-slide.prev {
-				opacity: 1;
+			.bg-image-cover {
 				z-index: 2;
-			}
-			.bg-slide.active {
-				opacity: 1;
-				z-index: 3;
-				transition: opacity 1.6s linear;
-			} */
-			.bg-hero-cover {
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				z-index: 4;
 				background: rgba(0, 0, 0, 0.4);
+			}
+			.bg-hero {
+				top: 10px;
+			}
+			.bg-hero .bg-image, .bg-hero .bg-image-cover {
+				/* height: calc(100vh - 10px); */
+				height: 100vh;
 			}
 
 			.entry-cover {
 				position: fixed;
-				top: 0;
+				top: -100vh;
 				left: 0;
 				right: 0;
-				height: calc(100% + 10px);
+				height: calc(100vh + 10px);
+				transform: translateY(100vh);
 				/* transition: height 0.6s ease-out; */
-				transition: top 2.4s cubic-bezier(0.16, 1, 0.29, 0.99);
+				transition: transform 2.4s cubic-bezier(0.16, 1, 0.29, 0.99);
 				/* background: #edece8; */
 				background: #4e2e1c; /* bg-brown */
 				z-index: 10;
@@ -263,7 +306,7 @@
 				top: 0;
 				left: 0;
 				right: 0;
-				z-index: 20;
+				z-index: 30;
 			}
 
 			.header-container-inner {
@@ -273,6 +316,7 @@
 				margin: 0 auto;
 			}
 			.header-logo {
+				display: block;
 				position: relative;
 				top: 20px;
 				left: 55%;
@@ -281,9 +325,10 @@
 				cursor: pointer;
 				transform: translateY(30vh);
 				transition: transform 2.4s cubic-bezier(0.16, 1, 0.29, 0.99);
-				z-index: 20;
+				z-index: 30;
 			}
 			.header-logo-flower-mask {
+				display: block;
 				position: absolute;
 				width: 100%;
 				height: 100%;
@@ -294,13 +339,15 @@
 				/* background: brown; */
 			}
 			.header-logo-flower {
+				display: block;
 				width: 100%;
 				height: 100%;
-				background: url("./assets/lotus3.svg");
+				background: url("./assets/logo-flower.svg");
 				background-size: contain;
 				animation: rotate 120s infinite linear;
 			}
 			.header-logo-text {
+				display: block;
 				position: absolute;
 				top: 24%;
 				left: -12%;
@@ -310,48 +357,117 @@
 				background-size: contain;
 			}
 
-			.content-container {
-				position: absolute;
-				top: 220px; /* little less than logo */
+			.section-container {
+				position: relative;
+				min-height: 100vh;
 				left: 0;
 				right: 0;
-				z-index: 20;
-				opacity: 0;
-				transition: opacity 1.2s ease-out;
+				display: none;
 			}
 
-			.content-container-inner {
+			.home-section-container {
+				display: block;
+			}
+			.home-section-container .section-inner {
+				transition: opacity 1.2s ease-out;
+				opacity: 0;
+				padding-top: 220px; /* little less than logo */
+			}
+
+			.section-inner {
+				position: relative;
 				width: 100%;
 				max-width: 1024px;
 				margin: 0 auto;
-				color: white;
-				font-family: Raleway;
-				font-size: 16pt;
+				padding-bottom: 30px;
+				z-index: 20;
 			}
 
-			.content-container p {
-				margin-top: 0;
+			.section-content {
 				padding-left: 10vw;
 				padding-right: 10vw;
 			}
 
-			.content-container .focus-link {
+			h2 {
+				margin: 0;
+				padding-top: 1em;
+			}
+			p {
+				margin-top: 0;
+				line-height: 1.5em;
+			}
+			a {
+				color: #a9ba59;
+				cursor: pointer;
+				text-decoration: none;
+			}
+			.focus-link {
 				font-family: Amarante;
 				font-size: 24pt;
-				color: #a9ba59;
 				/* color: #8d9661; */
-				cursor: pointer;
 				display: inline-block;
 			}
 			.focus-link:hover {
-				animation: shake 1.2s;
-				animation-iteration-count: infinite;
-				/* text-decoration: underline; */
+				animation: shake 1.2s infinite;
+			}
+			#welcome-words {
+				display: inline-block;
+				position: relative;
+				margin: 0;
+				padding: 0;
+				width: 0;
+				font-family: Amarante;
+				font-size: 24pt;
+				color: #a9ba59;
+				cursor: pointer;
+			}
+			#welcome-word-follower {
+				display: inline-block;
+				transform: translateX(0);
+				transition: transform 1.4s ease-in-out;
+			}
+			.welcome-word {
+				position: absolute;
+				margin: 0;
+				padding: 0;
+				display: none;
+				transition: transform 2.6s ease-out, opacity 2.6s ease-out;
+			}
+			.welcome-word.preactive {
+				display: block;
+				transform: translateY(10px);
+				opacity: 0;
+			}
+			.welcome-word.preactive.active {
+				transform: translateY(0);
+				opacity: 1;
+			}
+			.welcome-word.preactive.active.prev {
+				display: block;
+
+				transform: translateY(-20px);
+				opacity: 0;
+			}
+
+			.section-title {
+				font-family: Amarante;
+				font-size: 24pt;
+				font-weight: normal;
+				padding: 1em 0;
 			}
 
 			@media only screen and (max-width: 800px) {
-				.bg-hero-container {
-					max-height: 130vw;
+				body {
+					font-size: 14pt;
+				}
+				.focus-link, #welcome-word {
+					font-size: 20pt;
+				}
+
+				.bg-hero .bg-image, .bg-hero .bg-image-cover,
+				.bg-image, .bg-image-cover {
+					/* max-height: 130vw; */
+					height: 100%;
 				}
 
 				.header-logo {
@@ -361,23 +477,81 @@
 					top: 5vw;
 				}
 
-				.content-container {
-					top: 40vw;
+				.home-section-container .section-inner {
+					padding-top: 40vw;
+				}
+				.section-container {
+					min-height: auto;
+				}
+				.section-inner {
+					padding-bottom: 15vw;
+				}
+
+				.focus-link:hover {
+					animation: none;
 				}
 			}
 		</style>
 		<script type="text/javascript">
 			$(function () {
+				const $entryCover = $('.entry-cover');
+				const $headerLogo = $('.header-logo');
+				const $sectionContainers = $('.section-container');
+				const $homeSectionInner = $('.home-section-container .section-inner');
+
+				const welcomeWords = [
+					'beautiful', 'curious', 'free', 'kindred', 'timeless', 'open', 'eclectic', 'sacred', 'gentle'
+				];
+				const $welcomeWordsContainer = $('#welcome-words');
+				const $welcomeWordFollower = $('#welcome-word-follower');
+				const $welcomeWords = welcomeWords
+					.map((word) => $(`<span class="welcome-word">${word}</span>`));
+				$welcomeWordsContainer.append($welcomeWords, '&nbsp;');
+
+				let welcomeWordIndex = 0;
+				let $prevWelcomeWord = null;
+				let $activeWelcomeWord = $welcomeWords[welcomeWordIndex];
+				$activeWelcomeWord.addClass('preactive active');
+				// $welcomeWords.eq(0).addClass('prev');
+				// $welcomeWords.eq(1).addClass('preactive').addClass('active');
+
 				setTimeout(function() {
-					$('.entry-cover').css('top', '-100%');
-					$('.header-logo').css('transform', 'translateY(0)');
+					$welcomeWordFollower.css('transform', `translateX(${$activeWelcomeWord.width()}px)`);
+					$entryCover.css('transform', 'translateY(0)');
+					$headerLogo.css('transform', 'translateY(0)');
 				}, 1000);
 
 				setTimeout(function() {
-					$('.entry-cover').css('z-index', 30);
-					$('.content-container').css('opacity', 1);
+					$entryCover.css('z-index', 50);
+					$sectionContainers.show();
+					$homeSectionInner.css('opacity', 1);
+
+					setInterval(function() {
+						welcomeWordIndex = (welcomeWordIndex + 1) % $welcomeWords.length;
+						$prevWelcomeWord && $prevWelcomeWord.removeClass('preactive active prev');
+						$prevWelcomeWord = $activeWelcomeWord;
+						$prevWelcomeWord.addClass('prev');
+						$activeWelcomeWord = $welcomeWords[welcomeWordIndex];
+						$activeWelcomeWord.addClass('preactive');
+						$welcomeWordFollower.css('transform', `translateX(${$activeWelcomeWord.width()}px)`);
+						setTimeout(function() {
+							$activeWelcomeWord.addClass('active');
+						}, 200);
+					}, 5000);
 				}, 3400);
 
+
+				/*
+				const $welcomeWord = $('#welcome-word');
+				$welcomeWord.html($welcomeWord.text().replace(/\S/g, '<span>$&</span>'));
+				// $('#welcome-word span').each(function () {
+				$welcomeWord.children('span').each(function () {
+					const $this = $(this);
+					$this.on('mouseover', function() {
+						$this.addClass('active');
+					});
+				});
+				*/
 
 			// jiggling words
 			// 	$focusLinks = $('.focus-link');
@@ -392,14 +566,6 @@
 		</script>
 	</head>
 	<body>
-		<div class="bg-hero-container">
-			<div class="bg-hero" style="background-image: url('./assets/Slider-1.jpg');"></div>
-			<!-- <div class="bg-slide active" style="background-image: url('./assets/Slider-2.jpg');"></div> -->
-			<!-- <div class="bg-slide" style="background-image: url('./assets/Slider-3.jpg');"></div> -->
-			<!-- <div class="bg-slide" style="background-image: url('./assets/Slider-4.jpg');"></div> -->
-			<div class="bg-hero-cover"></div>
-		</div>
-
 		<div class="bg-light-container">
 			<div class='bg-light x1'></div>
 			<div class='bg-light x2'></div>
@@ -414,33 +580,88 @@
 
 		<div class="entry-cover"></div>
 
-		<div class="body-container">
-			<div class="header-container">
-				<div class="header-container-inner">
-					<div class="header-logo">
-						<div class="header-logo-flower-mask">
-							<div class="header-logo-flower"></div>
-						</div>
-						<div class="header-logo-text"></div>
-					</div>
+		<div class="header-container">
+			<div class="header-container-inner">
+				<a href="/" class="header-logo">
+					<span class="header-logo-flower-mask">
+						<span class="header-logo-flower"></span>
+					</span>
+					<span class="header-logo-text"></span>
+				</a>
+			</div>
+		</div>
+
+		<div class="section-container home-section-container">
+			<div class="bg-image-container bg-hero">
+				<div class="bg-image" style="background-image: url('./assets/Slider-1.jpg');">
+					<div class="bg-image-cover"></div>
 				</div>
 			</div>
 
-			<div class="content-container">
-				<div class="content-container-inner">
+			<div class="section-inner">
+				<div class="section-content">
 					<p>
-						Welcome, <span class="focus-link">beautiful</span> spirit.
+						Welcome,
+						<span id="welcome-words"></span>
+						<span id="welcome-word-follower">spirit.</span>
 					</p>
 					<p>
-						<span class="focus-link">The Conscious Collective</span> is a community for international explorers of psychedelics and mindful events based in Madrid.
-					</p>
-
-					<p>
-						Come meet us at one of our <span class="focus-link">public events</span>.
+						<a href="#section-who-we-are" id="link-who-we-are" class="focus-link">The Conscious Collective</a> is a community for international explorers of psychedelics and mindful events based in Madrid.
 					</p>
 
 					<p>
-						Or join our <span class="focus-link">Telegram channel</span> to stay updated with other activities in our community.
+						Come meet us at one of our <a href="#section-events" id="link-events" class="focus-link">public events</a>.
+					</p>
+
+					<p>
+						Or join our <a href="#section-connect-with-us"  id="link-connect-with-us" class="focus-link">Telegram channel</a> to stay updated with other activities in our community.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="section-container">
+			<div class="bg-image-container">
+				<div class="bg-image bg-blue"></div>
+			</div>
+
+			<div class="section-inner" style="height: 300px">
+				<div class="section-content">
+					<h2 class="section-title" id="section-events">Events</h2>
+					<p>
+						Coming soon... 💃
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="section-container">
+			<div class="bg-image-container">
+				<div class="bg-image" style="background-image: url('./assets/Slider-2.jpg');">
+					<div class="bg-image-cover"></div>
+				</div>
+			</div>
+
+			<div class="section-inner" style="height: 300px">
+				<div class="section-content">
+					<h2 class="section-title" id="section-connect-with-us">Connect With Us</h2>
+					<p>
+						Coming soon... 🫂
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="section-container">
+			<div class="bg-image-container">
+				<div class="bg-image bg-purple"></div>
+			</div>
+
+			<div class="section-inner" style="height: 300px">
+				<div class="section-content">
+					<h2 class="section-title" id="section-who-we-are">Who We Are</h2>
+					<p>
+						Coming soon... 💫
 					</p>
 				</div>
 			</div>
