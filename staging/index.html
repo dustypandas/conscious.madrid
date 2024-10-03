@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>The Conscious Collective</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Amarante&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<style>
+			html, body {
+				width: 100%;
+				height:100%;
+				overflow: hidden;
+			}
+
+			@keyframes gradient {
+				0% {
+					background-position: 0% 50%;
+				}
+				50% {
+					background-position: 100% 50%;
+				}
+				100% {
+					background-position: 0% 50%;
+				}
+			}
+
+			.light {
+				position: absolute;
+				width: 0px;
+				opacity: .75;
+				background-color: white;
+				box-shadow: #e9f1f1 0px 0px 20px 2px;
+				opacity: 0;
+				top: 100vh;
+				bottom: 0px;
+				left: 0px;
+				right: 0px;
+				margin: auto;
+				z-index: 5;
+			}
+
+			.x1{
+				-webkit-animation: floatUp 8s infinite linear;
+				-moz-animation: floatUp 8s infinite linear;
+				-o-animation: floatUp 8s infinite linear;
+				animation: floatUp 8s infinite linear;
+				-webkit-transform: scale(1.0);
+				-moz-transform: scale(1.0);
+				-o-transform: scale(1.0);
+				transform: scale(1.0);
+			}
+
+			.x2{
+				-webkit-animation: floatUp 14s infinite linear;
+				-moz-animation: floatUp 14s infinite linear;
+				-o-animation: floatUp 14s infinite linear;
+				animation: floatUp 14s infinite linear;
+				-webkit-transform: scale(1.6);
+				-moz-transform: scale(1.6);
+				-o-transform: scale(1.6);
+				transform: scale(1.6);
+				left: 15%;
+			}
+
+			.x3{
+				-webkit-animation: floatUp 5s infinite linear;
+				-moz-animation: floatUp 5s infinite linear;
+				-o-animation: floatUp 5s infinite linear;
+				animation: floatUp 5s infinite linear;
+				-webkit-transform: scale(.5);
+				-moz-transform: scale(.5);
+				-o-transform: scale(.5);
+				transform: scale(.5);
+				left: -15%;
+			}
+
+			.x4{
+				-webkit-animation: floatUp 9s infinite linear;
+				-moz-animation: floatUp 9s infinite linear;
+				-o-animation: floatUp 9s infinite linear;
+				animation: floatUp 9s infinite linear;
+				-webkit-transform: scale(1.2);
+				-moz-transform: scale(1.2);
+				-o-transform: scale(1.2);
+				transform: scale(1.2);
+				left: -34%;
+			}
+
+			.x5{
+				-webkit-animation: floatUp 16s infinite linear;
+				-moz-animation: floatUp 16s infinite linear;
+				-o-animation: floatUp 16s infinite linear;
+				animation: floatUp 16s infinite linear;
+				-webkit-transform: scale(2.2);
+				-moz-transform: scale(2.2);
+				-o-transform: scale(2.2);
+				transform: scale(2.2);
+				left: -57%;
+			}
+
+			.x6{
+				-webkit-animation: floatUp 6s infinite linear;
+				-moz-animation: floatUp 6s infinite linear;
+				-o-animation: floatUp 6s infinite linear;
+				animation: floatUp 6s infinite linear;
+				-webkit-transform: scale(.8);
+				-moz-transform: scale(.8);
+				-o-transform: scale(.8);
+				transform: scale(.8);
+				left: -81%;
+			}
+
+			.x7{
+				-webkit-animation: floatUp 10.6s infinite linear;
+				-moz-animation: floatUp 10.6s infinite linear;
+				-o-animation: floatUp 10.6s infinite linear;
+				animation: floatUp 10.6s infinite linear;
+				-webkit-transform: scale(3.2);
+				-moz-transform: scale(3.2);
+				-o-transform: scale(3.2);
+				transform: scale(3.2);
+				left: 37%;
+			}
+
+			.x8{
+				-webkit-animation: floatUp 9.4s infinite linear;
+				-moz-animation: floatUp 9.4s infinite linear;
+				-o-animation: floatUp 9.4s infinite linear;
+				animation: floatUp 9.4s infinite linear;
+				-webkit-transform: scale(1.7);
+				-moz-transform: scale(1.7);
+				-o-transform: scale(1.7);
+				transform: scale(1.7);
+				left: 62%;
+			}
+
+			.x9{
+				-webkit-animation: floatUp 8.2s infinite linear;
+				-moz-animation: floatUp 8.2s infinite linear;
+				-o-animation: floatUp 8.2s infinite linear;
+				animation: floatUp 8.2s infinite linear;
+				-webkit-transform: scale(0.9);
+				-moz-transform: scale(0.9);
+				-o-transform: scale(0.9);
+				transform: scale(0.9);
+				left: 85%;
+			}
+
+			@-webkit-keyframes floatUp{
+				0%{top: 100vh; opacity: 0;}
+				25%{opacity: 1;}
+				50%{top: 0vh; opacity: .8;}
+				75%{opacity: 1;}
+				100%{top: -100vh; opacity: 0;}
+			}
+			@-moz-keyframes floatUp{
+				0%{top: 100vh; opacity: 0;}
+				25%{opacity: 1;}
+				50%{top: 0vh; opacity: .8;}
+				75%{opacity: 1;}
+				100%{top: -100vh; opacity: 0;}
+			}
+			@-o-keyframes floatUp{
+				0%{top: 100vh; opacity: 0;}
+				25%{opacity: 1;}
+				50%{top: 0vh; opacity: .8;}
+				75%{opacity: 1;}
+				100%{top: -100vh; opacity: 0;}
+			}
+			@keyframes floatUp{
+				0%{top: 100vh; opacity: 0;}
+				25%{opacity: 1;}
+				50%{top: 0vh; opacity: .8;}
+				75%{opacity: 1;}
+				100%{top: -100vh; opacity: 0;}
+			}
+
+			@keyframes rotate {
+				0% { rotate: 0deg; }
+				100% { rotate: -360deg; }
+			}
+
+			@keyframes shake {
+				0% { transform: translate(1px, 0) rotate(1deg); }
+				15% { transform: translate(-1px, 0) rotate(-1deg); }
+				30% { transform: translate(1px, 0) rotate(1deg); }
+				45% { transform: translate(-1px, 0) rotate(-1deg); }
+				60% { transform: translate(1px, 0) rotate(1deg); }
+				100% { transform: translate(1px, 0) rotate(1deg); }
+			}
+
+			@keyframes shake2 {
+				0% { transform: translate(1px, 0); }
+				15% { transform: translate(-1px, 0); }
+				30% { transform: translate(1px, 0); }
+				45% { transform: translate(-1px, 0); }
+				60% { transform: translate(1px, 0); }
+				100% { transform: translate(1px, 0); }
+			}
+
+			body {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				background: #edece8;
+			}
+
+			.bg-slides-container {
+				position: absolute;
+				top: 10px;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 1;
+			}
+			.bg-slide {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 1;
+				background-size: cover;
+				background-position: center;
+				opacity: 0;
+			}
+			.bg-slide.prev {
+				opacity: 1;
+				z-index: 2;
+			}
+			.bg-slide.active {
+				opacity: 1;
+				z-index: 3;
+				transition: opacity 1.6s linear;
+			}
+			.bg-cover {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 4;
+				background: rgba(0, 0, 0, 0.4);
+			}
+
+			.entry-cover {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: calc(100% + 10px);
+				/* transition: height 0.6s ease-out; */
+				transition: top 2.4s cubic-bezier(0.16, 1, 0.29, 0.99);
+				/* background: #edece8; */
+				background: #4e2e1c;
+				z-index: 100;
+			}
+
+			.header-container {
+				position: absolute;
+				top: 30%;
+				left: 60%;
+				transition: top 2.4s cubic-bezier(0.16, 1, 0.29, 0.99);
+				z-index: 101;
+			}
+
+			.header-logo {
+				position: relative;
+				width: 250px;
+				height: 250px;
+				cursor: pointer;
+			}
+			.header-logo-flower-mask {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 250px;
+				height: 250px;
+				/* -webkit-mask-image: url("./assets/lotus2.png"); */
+				/* mask-image: url("./assets/lotus2.png"); */
+				mask-image: linear-gradient(black 29%, transparent 33%, transparent 67%, black 71%);
+				/* mask-size: contain; */
+				/* background: brown; */
+			}
+			.header-logo-flower {
+				width: 250px;
+				height: 250px;
+				background: url("./assets/lotus3.svg");
+				background-size: contain;
+				animation: rotate 120s infinite linear;
+			}
+			.header-logo-text {
+				position: absolute;
+				top: 60px;
+				left: -30px;
+				width: 320px;
+				height: 150px;
+				background: url("./assets/logo-text.svg") no-repeat;
+				background-size: contain;
+			}
+
+			.body-container {
+				position: fixed;
+				max-width: 1024px;
+				top: 200px;
+				margin: 0 auth;
+				padding: 0 10vw;
+				z-index: 10;
+			}
+
+			.content-container {
+				color: white;
+				font-family: Raleway;
+				font-size: 16pt;
+				opacity: 0;
+				transition: opacity 1.2s ease-out;
+			}
+
+			.content-container .focus-link {
+				font-family: Amarante;
+				font-size: 24pt;
+				color: #a9ba59;
+				/* color: #8d9661; */
+				cursor: pointer;
+				display: inline-block;
+			}
+			.focus-link:hover {
+				animation: shake 1.2s;
+				animation-iteration-count: infinite;
+				/* text-decoration: underline; */
+			}
+		</style>
+		<script type="text/javascript">
+			$(function () {
+				setTimeout(function() {
+					$('.entry-cover').css('top', '-100%');
+					$('.header-container').css('top', '20px');
+				}, 1000);
+
+				setTimeout(function() {
+					$('.content-container').css('opacity', 1);
+				}, 3400);
+
+
+			// jiggling words
+			// 	$focusLinks = $('.focus-link');
+			// 	$activeLink = $focusLinks.eq(0);
+
+			// 	setInterval(function() {
+			// 		$activeLink.removeClass('is-active');
+			// 		$activeLink = $focusLinks.eq(Math.floor(Math.random() * $focusLinks.length));
+			// 		$activeLink.addClass('is-active');
+			// 	}, 2000);
+			});
+		</script>
+	</head>
+	<body>
+		<div class="bg-slides-container">
+			<div class="bg-slide active" style="background-image: url('./assets/Slider-1.jpg');"></div>
+			<!-- <div class="bg-slide active" style="background-image: url('./assets/Slider-2.jpg');"></div> -->
+			<!-- <div class="bg-slide" style="background-image: url('./assets/Slider-3.jpg');"></div> -->
+			<!-- <div class="bg-slide" style="background-image: url('./assets/Slider-4.jpg');"></div> -->
+			<div class="bg-cover"></div>
+		</div>
+
+		<div class='light x1'></div>
+		<div class='light x2'></div>
+		<div class='light x3'></div>
+		<div class='light x4'></div>
+		<div class='light x5'></div>
+		<div class='light x6'></div>
+		<div class='light x7'></div>
+		<div class='light x8'></div>
+		<div class='light x9'></div>
+
+		<div class="entry-cover"></div>
+
+		<div class="header-container">
+			<div class="header-logo">
+				<div class="header-logo-flower-mask">
+					<div class="header-logo-flower"></div>
+				</div>
+				<div class="header-logo-text"></div>
+			</div>
+		</div>
+		<div class="body-container">
+			<div class="content-container">
+				<p>
+					Welcome, <span class="focus-link">beautiful</span> spirit.
+				</p>
+				<p>
+					<span class="focus-link">The Conscious Collective</span> is a community for international explorers of psychedelic and mindful events based in Madrid.
+				</p>
+
+				<p>
+					Come meet us at one of our <span class="focus-link">public events</span>.
+				</p>
+
+				<p>
+					Or join our <span class="focus-link">Telegram channel</span> to stay updated with other activities in our community.
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
