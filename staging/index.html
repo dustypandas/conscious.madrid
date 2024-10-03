@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="dark">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>The Conscious Collective</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="color-scheme" content="only dark">
 
+		<link rel="preload" as="image" href="./assets/logo-flower.svg">
+		<link rel="preload" as="image" href="./assets/logo-text.svg">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Amarante&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -215,7 +218,7 @@
 			#welcome-word span {
 				display: inline-block;
 			}
-			#welcome-word span.active {
+			#welcome-word span.is-active {
 				animation: smoke 5s linear forwards;
 				transform-origin: bottom;
 			} */
@@ -262,7 +265,6 @@
 			}
 
 			.bg-image-container {
-				/* position: relative; */
 				width: 100vw;
 				height: 0;
 				overflow: visible;
@@ -306,7 +308,7 @@
 				top: 0;
 				left: 0;
 				right: 0;
-				z-index: 30;
+				z-index: 20;
 			}
 
 			.header-container-inner {
@@ -325,7 +327,6 @@
 				cursor: pointer;
 				transform: translateY(30vh);
 				transition: transform 2.4s cubic-bezier(0.16, 1, 0.29, 0.99);
-				z-index: 30;
 			}
 			.header-logo-flower-mask {
 				display: block;
@@ -333,10 +334,8 @@
 				width: 100%;
 				height: 100%;
 				/* -webkit-mask-image: url("./assets/lotus2.png"); */
-				/* mask-image: url("./assets/lotus2.png"); */
 				mask-image: linear-gradient(black 29%, transparent 33%, transparent 67%, black 71%);
 				/* mask-size: contain; */
-				/* background: brown; */
 			}
 			.header-logo-flower {
 				display: block;
@@ -356,6 +355,18 @@
 				background: url("./assets/logo-text.svg") no-repeat;
 				background-size: contain;
 			}
+			.footer-message {
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				font-size: 10pt;
+			}
+			.footer-message .section-content {
+				padding-bottom: 0;
+				text-align: center;
+				opacity: 0.7;
+			}
 
 			.section-container {
 				position: relative;
@@ -369,9 +380,11 @@
 				display: block;
 			}
 			.home-section-container .section-inner {
-				transition: opacity 1.2s ease-out;
-				opacity: 0;
 				padding-top: 220px; /* little less than logo */
+				transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+			}
+			.home-section-container .section-inner.is-hidden {
+				opacity: 0;
 			}
 
 			.section-inner {
@@ -379,13 +392,11 @@
 				width: 100%;
 				max-width: 1024px;
 				margin: 0 auto;
-				padding-bottom: 30px;
-				z-index: 20;
+				z-index: 30;
 			}
 
 			.section-content {
-				padding-left: 10vw;
-				padding-right: 10vw;
+				padding: 0 4em 2em;
 			}
 
 			h2 {
@@ -420,32 +431,36 @@
 				font-size: 24pt;
 				color: #a9ba59;
 				cursor: pointer;
+				-webkit-tap-highlight-color: transparent;
 			}
 			#welcome-word-follower {
 				display: inline-block;
 				transform: translateX(0);
-				transition: transform 1.4s ease-in-out;
+				transition: transform 1.2s ease-in-out;
+			}
+			#welcome-words:hover {
+				animation: shake2 1.2s infinite;
 			}
 			.welcome-word {
 				position: absolute;
 				margin: 0;
 				padding: 0;
 				display: none;
-				transition: transform 2.6s ease-out, opacity 2.6s ease-out;
+				transition: transform 2.4s ease-out, opacity 2.4s ease-out;
 			}
-			.welcome-word.preactive {
+			.welcome-word.is-preactive {
 				display: block;
-				transform: translateY(10px);
+				transform: translateY(0.5em);
 				opacity: 0;
 			}
-			.welcome-word.preactive.active {
+			.welcome-word.is-preactive.is-active {
 				transform: translateY(0);
 				opacity: 1;
 			}
-			.welcome-word.preactive.active.prev {
+			.welcome-word.is-preactive.is-active.is-prev {
 				display: block;
 
-				transform: translateY(-20px);
+				transform: translateY(-1em);
 				opacity: 0;
 			}
 
@@ -483,11 +498,11 @@
 				.section-container {
 					min-height: auto;
 				}
-				.section-inner {
-					padding-bottom: 15vw;
+				.section-content {
+					padding: 0 10vw 15vw;
 				}
 
-				.focus-link:hover {
+				#welcome-words:hover, .focus-link:hover {
 					animation: none;
 				}
 			}
@@ -511,9 +526,20 @@
 				let welcomeWordIndex = 0;
 				let $prevWelcomeWord = null;
 				let $activeWelcomeWord = $welcomeWords[welcomeWordIndex];
-				$activeWelcomeWord.addClass('preactive active');
-				// $welcomeWords.eq(0).addClass('prev');
-				// $welcomeWords.eq(1).addClass('preactive').addClass('active');
+				$activeWelcomeWord.addClass('is-preactive is-active');
+
+				function updateWelcomeWord() {
+					welcomeWordIndex = (welcomeWordIndex + 1) % $welcomeWords.length;
+					$prevWelcomeWord && $prevWelcomeWord.removeClass('is-preactive is-active is-prev');
+					$prevWelcomeWord = $activeWelcomeWord;
+					$prevWelcomeWord.addClass('is-prev');
+					$activeWelcomeWord = $welcomeWords[welcomeWordIndex];
+					$activeWelcomeWord.addClass('is-preactive');
+					$welcomeWordFollower.css('transform', `translateX(${$activeWelcomeWord.width()}px)`);
+					setTimeout(function() {
+						$activeWelcomeWord.addClass('is-active');
+					}, 200);
+				}
 
 				setTimeout(function() {
 					$welcomeWordFollower.css('transform', `translateX(${$activeWelcomeWord.width()}px)`);
@@ -524,34 +550,11 @@
 				setTimeout(function() {
 					$entryCover.css('z-index', 50);
 					$sectionContainers.show();
-					$homeSectionInner.css('opacity', 1);
+					$homeSectionInner.removeClass('is-hidden');
+					$welcomeWordsContainer.click(updateWelcomeWord);
 
-					setInterval(function() {
-						welcomeWordIndex = (welcomeWordIndex + 1) % $welcomeWords.length;
-						$prevWelcomeWord && $prevWelcomeWord.removeClass('preactive active prev');
-						$prevWelcomeWord = $activeWelcomeWord;
-						$prevWelcomeWord.addClass('prev');
-						$activeWelcomeWord = $welcomeWords[welcomeWordIndex];
-						$activeWelcomeWord.addClass('preactive');
-						$welcomeWordFollower.css('transform', `translateX(${$activeWelcomeWord.width()}px)`);
-						setTimeout(function() {
-							$activeWelcomeWord.addClass('active');
-						}, 200);
-					}, 5000);
-				}, 3400);
-
-
-				/*
-				const $welcomeWord = $('#welcome-word');
-				$welcomeWord.html($welcomeWord.text().replace(/\S/g, '<span>$&</span>'));
-				// $('#welcome-word span').each(function () {
-				$welcomeWord.children('span').each(function () {
-					const $this = $(this);
-					$this.on('mouseover', function() {
-						$this.addClass('active');
-					});
-				});
-				*/
+					setInterval(updateWelcomeWord, 5000);
+				}, 2800);
 
 			// jiggling words
 			// 	$focusLinks = $('.focus-link');
@@ -598,7 +601,7 @@
 				</div>
 			</div>
 
-			<div class="section-inner">
+			<div class="section-inner is-hidden">
 				<div class="section-content">
 					<p>
 						Welcome,
@@ -606,15 +609,15 @@
 						<span id="welcome-word-follower">spirit.</span>
 					</p>
 					<p>
-						<a href="#section-who-we-are" id="link-who-we-are" class="focus-link">The Conscious Collective</a> is a community for international explorers of psychedelics and mindful events based in Madrid.
+						<a href="#section-who-we-are" class="focus-link">The Conscious Collective</a> is a community for international explorers of psychedelics and mindful events based in Madrid.
 					</p>
 
 					<p>
-						Come meet us at one of our <a href="#section-events" id="link-events" class="focus-link">public events</a>.
+						Come meet us at one of our <a href="#section-public-events" class="focus-link">public events</a>.
 					</p>
 
 					<p>
-						Or join our <a href="#section-connect-with-us"  id="link-connect-with-us" class="focus-link">Telegram channel</a> to stay updated with other activities in our community.
+						Or join our <a href="#section-connect-with-us" class="focus-link">Telegram channel</a> to stay updated with other activities in our community.
 					</p>
 				</div>
 			</div>
@@ -627,9 +630,9 @@
 
 			<div class="section-inner" style="height: 300px">
 				<div class="section-content">
-					<h2 class="section-title" id="section-events">Events</h2>
+					<h2 class="section-title" id="section-public-events">Public Events</h2>
 					<p>
-						Coming soon... 💃
+						Coming soon... 🪘
 					</p>
 				</div>
 			</div>
@@ -663,6 +666,18 @@
 					<p>
 						Coming soon... 💫
 					</p>
+				</div>
+			</div>
+
+			<div class="footer-message">
+				<div class="section-inner">
+					<div class="section-content" style="padding-bottom: 0;">
+						<p>
+							This project (and our community) is an ongoing work in progress - 🙏
+							<a href="#section-connect-with-us">please reach out</a>
+							if you would like to help!
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
