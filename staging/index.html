@@ -14,25 +14,22 @@
 			html, body {
 				width: 100%;
 				height:100%;
-				overflow: hidden;
 			}
 
-			@keyframes gradient {
-				0% {
-					background-position: 0% 50%;
-				}
-				50% {
-					background-position: 100% 50%;
-				}
-				100% {
-					background-position: 0% 50%;
-				}
+			.bg-light-container {
+				position: fixed;
+				top: 100vh;
+				bottom: 0px;
+				left: 0px;
+				right: 0px;
+				z-index: 5;
 			}
 
-			.light {
+
+			.bg-light {
 				position: absolute;
 				width: 0px;
-				opacity: .75;
+				/* opacity: .75; */
 				background-color: white;
 				box-shadow: #e9f1f1 0px 0px 20px 2px;
 				opacity: 0;
@@ -41,10 +38,9 @@
 				left: 0px;
 				right: 0px;
 				margin: auto;
-				z-index: 5;
 			}
 
-			.x1{
+			.x1 {
 				-webkit-animation: floatUp 8s infinite linear;
 				-moz-animation: floatUp 8s infinite linear;
 				-o-animation: floatUp 8s infinite linear;
@@ -55,7 +51,7 @@
 				transform: scale(1.0);
 			}
 
-			.x2{
+			.x2 {
 				-webkit-animation: floatUp 14s infinite linear;
 				-moz-animation: floatUp 14s infinite linear;
 				-o-animation: floatUp 14s infinite linear;
@@ -67,7 +63,7 @@
 				left: 15%;
 			}
 
-			.x3{
+			.x3 {
 				-webkit-animation: floatUp 5s infinite linear;
 				-moz-animation: floatUp 5s infinite linear;
 				-o-animation: floatUp 5s infinite linear;
@@ -79,7 +75,7 @@
 				left: -15%;
 			}
 
-			.x4{
+			.x4 {
 				-webkit-animation: floatUp 9s infinite linear;
 				-moz-animation: floatUp 9s infinite linear;
 				-o-animation: floatUp 9s infinite linear;
@@ -91,7 +87,7 @@
 				left: -34%;
 			}
 
-			.x5{
+			.x5 {
 				-webkit-animation: floatUp 16s infinite linear;
 				-moz-animation: floatUp 16s infinite linear;
 				-o-animation: floatUp 16s infinite linear;
@@ -103,7 +99,7 @@
 				left: -57%;
 			}
 
-			.x6{
+			.x6 {
 				-webkit-animation: floatUp 6s infinite linear;
 				-moz-animation: floatUp 6s infinite linear;
 				-o-animation: floatUp 6s infinite linear;
@@ -115,7 +111,7 @@
 				left: -81%;
 			}
 
-			.x7{
+			.x7 {
 				-webkit-animation: floatUp 10.6s infinite linear;
 				-moz-animation: floatUp 10.6s infinite linear;
 				-o-animation: floatUp 10.6s infinite linear;
@@ -127,7 +123,7 @@
 				left: 37%;
 			}
 
-			.x8{
+			.x8 {
 				-webkit-animation: floatUp 9.4s infinite linear;
 				-moz-animation: floatUp 9.4s infinite linear;
 				-o-animation: floatUp 9.4s infinite linear;
@@ -139,7 +135,7 @@
 				left: 62%;
 			}
 
-			.x9{
+			.x9 {
 				-webkit-animation: floatUp 8.2s infinite linear;
 				-moz-animation: floatUp 8.2s infinite linear;
 				-o-animation: floatUp 8.2s infinite linear;
@@ -208,10 +204,11 @@
 				height: 100%;
 				margin: 0;
 				padding: 0;
-				background: #edece8;
+				background: #4e2e1c; /* bg-brown */
+				 /* #1c2d4e; bg-blue */
 			}
 
-			.bg-slides-container {
+			.bg-hero-container {
 				position: absolute;
 				top: 10px;
 				left: 0;
@@ -219,7 +216,7 @@
 				bottom: 0;
 				z-index: 1;
 			}
-			.bg-slide {
+			.bg-hero {
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -228,9 +225,8 @@
 				z-index: 1;
 				background-size: cover;
 				background-position: center;
-				opacity: 0;
 			}
-			.bg-slide.prev {
+			/* .bg-slide.prev {
 				opacity: 1;
 				z-index: 2;
 			}
@@ -238,8 +234,8 @@
 				opacity: 1;
 				z-index: 3;
 				transition: opacity 1.6s linear;
-			}
-			.bg-cover {
+			} */
+			.bg-hero-cover {
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -258,30 +254,39 @@
 				/* transition: height 0.6s ease-out; */
 				transition: top 2.4s cubic-bezier(0.16, 1, 0.29, 0.99);
 				/* background: #edece8; */
-				background: #4e2e1c;
-				z-index: 100;
+				background: #4e2e1c; /* bg-brown */
+				z-index: 10;
 			}
 
 			.header-container {
 				position: absolute;
-				top: 30%;
-				left: 60%;
-				transition: top 2.4s cubic-bezier(0.16, 1, 0.29, 0.99);
-				z-index: 101;
+				top: 0;
+				left: 0;
+				right: 0;
+				z-index: 20;
 			}
 
+			.header-container-inner {
+				position: relative;
+				width: 100%;
+				max-width: 1024px;
+				margin: 0 auto;
+			}
 			.header-logo {
 				position: relative;
+				top: 20px;
+				left: 55%;
 				width: 250px;
 				height: 250px;
 				cursor: pointer;
+				transform: translateY(30vh);
+				transition: transform 2.4s cubic-bezier(0.16, 1, 0.29, 0.99);
+				z-index: 20;
 			}
 			.header-logo-flower-mask {
 				position: absolute;
-				top: 0;
-				left: 0;
-				width: 250px;
-				height: 250px;
+				width: 100%;
+				height: 100%;
 				/* -webkit-mask-image: url("./assets/lotus2.png"); */
 				/* mask-image: url("./assets/lotus2.png"); */
 				mask-image: linear-gradient(black 29%, transparent 33%, transparent 67%, black 71%);
@@ -289,37 +294,45 @@
 				/* background: brown; */
 			}
 			.header-logo-flower {
-				width: 250px;
-				height: 250px;
+				width: 100%;
+				height: 100%;
 				background: url("./assets/lotus3.svg");
 				background-size: contain;
 				animation: rotate 120s infinite linear;
 			}
 			.header-logo-text {
 				position: absolute;
-				top: 60px;
-				left: -30px;
-				width: 320px;
-				height: 150px;
+				top: 24%;
+				left: -12%;
+				width: 128%;
+				height: 50%;
 				background: url("./assets/logo-text.svg") no-repeat;
 				background-size: contain;
 			}
 
-			.body-container {
-				position: fixed;
-				max-width: 1024px;
-				top: 200px;
-				margin: 0 auth;
-				padding: 0 10vw;
-				z-index: 10;
+			.content-container {
+				position: absolute;
+				top: 220px; /* little less than logo */
+				left: 0;
+				right: 0;
+				z-index: 20;
+				opacity: 0;
+				transition: opacity 1.2s ease-out;
 			}
 
-			.content-container {
+			.content-container-inner {
+				width: 100%;
+				max-width: 1024px;
+				margin: 0 auto;
 				color: white;
 				font-family: Raleway;
 				font-size: 16pt;
-				opacity: 0;
-				transition: opacity 1.2s ease-out;
+			}
+
+			.content-container p {
+				margin-top: 0;
+				padding-left: 10vw;
+				padding-right: 10vw;
 			}
 
 			.content-container .focus-link {
@@ -335,15 +348,33 @@
 				animation-iteration-count: infinite;
 				/* text-decoration: underline; */
 			}
+
+			@media only screen and (max-width: 800px) {
+				.bg-hero-container {
+					max-height: 130vw;
+				}
+
+				.header-logo {
+					width: 30vw;
+					height: 30vw;
+					left: 35vw;
+					top: 5vw;
+				}
+
+				.content-container {
+					top: 40vw;
+				}
+			}
 		</style>
 		<script type="text/javascript">
 			$(function () {
 				setTimeout(function() {
 					$('.entry-cover').css('top', '-100%');
-					$('.header-container').css('top', '20px');
+					$('.header-logo').css('transform', 'translateY(0)');
 				}, 1000);
 
 				setTimeout(function() {
+					$('.entry-cover').css('z-index', 30);
 					$('.content-container').css('opacity', 1);
 				}, 3400);
 
@@ -361,50 +392,57 @@
 		</script>
 	</head>
 	<body>
-		<div class="bg-slides-container">
-			<div class="bg-slide active" style="background-image: url('./assets/Slider-1.jpg');"></div>
+		<div class="bg-hero-container">
+			<div class="bg-hero" style="background-image: url('./assets/Slider-1.jpg');"></div>
 			<!-- <div class="bg-slide active" style="background-image: url('./assets/Slider-2.jpg');"></div> -->
 			<!-- <div class="bg-slide" style="background-image: url('./assets/Slider-3.jpg');"></div> -->
 			<!-- <div class="bg-slide" style="background-image: url('./assets/Slider-4.jpg');"></div> -->
-			<div class="bg-cover"></div>
+			<div class="bg-hero-cover"></div>
 		</div>
 
-		<div class='light x1'></div>
-		<div class='light x2'></div>
-		<div class='light x3'></div>
-		<div class='light x4'></div>
-		<div class='light x5'></div>
-		<div class='light x6'></div>
-		<div class='light x7'></div>
-		<div class='light x8'></div>
-		<div class='light x9'></div>
+		<div class="bg-light-container">
+			<div class='bg-light x1'></div>
+			<div class='bg-light x2'></div>
+			<div class='bg-light x3'></div>
+			<div class='bg-light x4'></div>
+			<div class='bg-light x5'></div>
+			<div class='bg-light x6'></div>
+			<div class='bg-light x7'></div>
+			<div class='bg-light x8'></div>
+			<div class='bg-light x9'></div>
+		</div>
 
 		<div class="entry-cover"></div>
 
-		<div class="header-container">
-			<div class="header-logo">
-				<div class="header-logo-flower-mask">
-					<div class="header-logo-flower"></div>
-				</div>
-				<div class="header-logo-text"></div>
-			</div>
-		</div>
 		<div class="body-container">
+			<div class="header-container">
+				<div class="header-container-inner">
+					<div class="header-logo">
+						<div class="header-logo-flower-mask">
+							<div class="header-logo-flower"></div>
+						</div>
+						<div class="header-logo-text"></div>
+					</div>
+				</div>
+			</div>
+
 			<div class="content-container">
-				<p>
-					Welcome, <span class="focus-link">beautiful</span> spirit.
-				</p>
-				<p>
-					<span class="focus-link">The Conscious Collective</span> is a community for international explorers of psychedelic and mindful events based in Madrid.
-				</p>
+				<div class="content-container-inner">
+					<p>
+						Welcome, <span class="focus-link">beautiful</span> spirit.
+					</p>
+					<p>
+						<span class="focus-link">The Conscious Collective</span> is a community for international explorers of psychedelics and mindful events based in Madrid.
+					</p>
 
-				<p>
-					Come meet us at one of our <span class="focus-link">public events</span>.
-				</p>
+					<p>
+						Come meet us at one of our <span class="focus-link">public events</span>.
+					</p>
 
-				<p>
-					Or join our <span class="focus-link">Telegram channel</span> to stay updated with other activities in our community.
-				</p>
+					<p>
+						Or join our <span class="focus-link">Telegram channel</span> to stay updated with other activities in our community.
+					</p>
+				</div>
 			</div>
 		</div>
 	</body>
