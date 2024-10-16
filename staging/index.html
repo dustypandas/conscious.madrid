@@ -15,6 +15,8 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<style>
 			html, body {
+				margin: 0;
+				padding: 0;
 				width: 100%;
 				height:100%;
 				scroll-behavior: smooth;
@@ -245,15 +247,11 @@
 			}
 
 			body {
-				width: 100%;
-				height: 100%;
-				margin: 0;
-				padding: 0;
 				/* background: linear-gradient(#4e2e1c 50%, #1c2d4e 50%); */
 				/* background: #4e2e1c; bg-brown */
 				background: #1c2d4e; /* bg-blue */
 				font-family: Raleway;
-				font-size: 16pt;
+				font-size: 13pt;
 				color: white;
 			}
 
@@ -386,6 +384,9 @@
 			.home-section-container .section-inner.is-hidden {
 				opacity: 0;
 			}
+			.home-section-container p {
+				font-size: 16pt;
+			}
 
 			.section-inner {
 				position: relative;
@@ -471,9 +472,21 @@
 				padding: 1em 0;
 			}
 
+			.content-about-us p {
+				font-size: 13pt;
+				opacity: 80%;
+			}
+			#about-us-img {
+				display: block;
+				float: right;
+				margin: 0 0 10px 10px;
+				padding: 0;
+				width: 300px;
+			}
+
 			@media only screen and (max-width: 800px) {
 				body {
-					font-size: 14pt;
+					font-size: 12pt;
 				}
 				.focus-link, #welcome-word {
 					font-size: 20pt;
@@ -495,8 +508,14 @@
 				.home-section-container .section-inner {
 					padding-top: 40vw;
 				}
+				.home-section-container p {
+					font-size: 14pt;
+				}
 				.section-container {
 					min-height: auto;
+				}
+				.section-title {
+					padding: 1em 0 0.5em;
 				}
 				.section-content {
 					padding: 0 10vw 15vw;
@@ -504,6 +523,15 @@
 
 				#welcome-words:hover, .focus-link:hover {
 					animation: none;
+				}
+
+				.content-about-us {
+					padding-bottom: 50px;
+				}
+				#about-us-img {
+					float: none;
+					width: 100%;
+					margin-left: 0;
 				}
 			}
 		</style>
@@ -660,12 +688,35 @@
 				<div class="bg-image bg-purple"></div>
 			</div>
 
-			<div class="section-inner" style="height: 300px">
+			<div class="section-inner">
 				<div class="section-content">
 					<h2 class="section-title" id="section-who-we-are">Who We Are</h2>
-					<p>
-						Coming soon... 💫
-					</p>
+					<div class="content-about-us">
+						<img src="./assets/about-us.jpg" id="about-us-img" />
+						<p>
+							The Conscious Collective started as a small group of friends, all international residents, psychedelic explorers, living in Madrid.
+						</p>
+						<p>
+							We wanted to play, and to experiment
+						</p>
+						<p>
+							...through mindful events, and psychedelic sentiments
+						</p>
+						<p>
+							...to connect and to build
+						</p>
+						<p>
+							...a community colourful and fulfilled
+						</p>
+						<p>
+							...for people just like ourselves, gleeful.
+						</p>
+						<p>&nbsp;</p>
+						<p>
+							If you too, empathize,<br/>
+							come join us, metamorphosize. 🌈
+						</p>
+					</div>
 				</div>
 			</div>
 
