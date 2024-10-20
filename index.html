@@ -793,14 +793,14 @@
 						const nameVal = $newsletterName.val();
 						if (!nameVal) {
 							$newsletterErrorMessage
-								.text('Oops, we\'re missing your name.').show();
+								.text('Oops, we still need a name.').show();
 							isFormInSubmission = false;
 							return;
 						}
 						const emailVal = $newsletterEmail.val();
 						if (!emailVal) {
 							$newsletterErrorMessage
-								.text('Oops, we\'re missing your email.').show();
+								.text('Oops, we still need an email.').show();
 							isFormInSubmission = false;
 							return;
 						}
