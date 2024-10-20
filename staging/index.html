@@ -409,7 +409,7 @@
 				line-height: 1.5em;
 			}
 			a {
-				color: #a9ba59;
+				color: #a9ba59; /* hl-green */
 				cursor: pointer;
 				text-decoration: none;
 			}
@@ -472,6 +472,136 @@
 				padding: 1em 0;
 			}
 
+			.content-connect-with-us {
+				text-align: center;
+			}
+			#links-container.hover-0 #link-telegram .link-icon, #links-container.hover-0 #link-email .link-icon {
+				opacity: 0.5;
+			}
+			#links-container.hover-1 #link-instagram .link-icon, #links-container.hover-1 #link-email .link-icon {
+				opacity: 0.5;
+			}
+			#links-container.hover-2 #link-instagram .link-icon, #links-container.hover-2 #link-telegram .link-icon {
+				opacity: 0.5;
+			}
+
+			.connect-link {
+				display: inline-block;
+				position: relative;
+				width: 60px;
+				height: 60px;
+				margin: 0 30px;
+			}
+			.link-icon {
+				display: inline-block;
+				width: 60px;
+				height: 60px;
+				transition: transform 0.4s ease-out;
+			}
+			.connect-link:hover .link-icon {
+				transform: translateY(-10px);
+			}
+			.link-text {
+				display: none;
+			}
+			#link-instagram .link-icon {
+				/* display: inline-block;
+				width: 2.5em;
+				height: 2.5em; */
+				background: url("./assets/icon-instagram.png") left center no-repeat;
+				background-size: contain;
+			}
+			#link-telegram .link-icon {
+				background: url("./assets/icon-telegram.png") left center no-repeat;
+				background-size: contain;
+			}
+			#link-email .link-icon {
+				background: url("./assets/icon-email.png") left center no-repeat;
+				background-size: contain;
+			}
+			#link-display {
+				display: inline-block;
+				margin-top: 0.5em;
+				/* font-size: 20pt; */
+				/* font-family: Amarante; */
+				/* min-width: 10px; */
+				transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+				transform: translateY(-20px);
+				opacity: 0;
+			}
+			#link-display.is-visible {
+				transform: translateY(0);
+				opacity: 1;
+			}
+			#newsletter-form {
+				position: relative;
+				/* overflow: hidden; */
+			}
+			.newsletter-intro {
+				margin-top: 2em;
+				font-size: 16pt;
+			}
+			.newsletter-form-inner {
+				position: relative;
+			}
+			.icon-check {
+				position: absolute;
+				top: 0;
+				left: 50%;
+				margin-left: -30px;
+				width: 60px;
+				height: 60px;
+				background: url('./assets/icon-check.png') center no-repeat;
+				background-size: contain;
+				transition: transform 0.8s ease-out;
+				transform: translateY(60px) rotate(180deg);
+				opacity: 0;
+			}
+			#newsletter-form.has-submitted .newsletter-form-inner {
+				display: none;
+			}
+			#newsletter-form.has-submitted .icon-check {
+				opacity: 1;
+				transform: translateY(0) rotate(0);
+			}
+			#newsletter-error-message {
+				display: none;
+				color: lightpink;
+			}
+			.newsletter-input-text, #newsletter-submit {
+				display: block;
+				margin: 0 auto 0.5em;
+				border: 1px solid #ccc;
+				padding: 0 1.25em;
+				font-family: Raleway;
+			}
+			.newsletter-input-text {
+				background: white;
+				color: #666;
+				font-size: 13pt;
+				line-height: 2.5em;
+				width: 50%;
+			}
+			.newsletter-input-text::placeholder {
+				color: #aaa;
+			}
+			#newsletter-submit {
+				background: #a9ba59; /* hl-green */;
+				color: white;
+				font-size: 13pt;
+				line-height: 2.5em;
+				border: none;
+				border-radius: 1.25em;
+				padding: 0 2em;
+				cursor: pointer;
+			}
+			#newsletter-submit:hover {
+				animation: shake2 1.2s infinite;
+			}
+
+			.content-about-us {
+				padding-bottom: 50px;
+			}
 			.content-about-us p {
 				font-size: 13pt;
 				opacity: 80%;
@@ -479,9 +609,9 @@
 			#about-us-img {
 				display: block;
 				float: right;
-				margin: 0 0 10px 10px;
+				margin: 0 0 10px 30px;
 				padding: 0;
-				width: 300px;
+				width: 330px;
 			}
 
 			@media only screen and (max-width: 800px) {
@@ -525,9 +655,27 @@
 					animation: none;
 				}
 
-				.content-about-us {
-					padding-bottom: 50px;
+				.content-connect-with-us {
+					text-align: left;
 				}
+				.connect-link {
+					width: auto;
+					margin: 10px 0;
+				}
+				.link-icon {
+					vertical-align: middle;
+					width: 50px;
+					height: 50px;
+				}
+				.link-text {
+					display: inline-block;
+					margin-left: 10px;
+					font-size: 14pt;
+				}
+				#link-display, .newsletter-intro, #newsletter-form {
+					display: none;
+				}
+
 				#about-us-img {
 					float: none;
 					width: 100%;
@@ -537,11 +685,23 @@
 		</style>
 		<script type="text/javascript">
 			$(function () {
+				// entry animations
 				const $entryCover = $('.entry-cover');
 				const $headerLogo = $('.header-logo');
 				const $sectionContainers = $('.section-container');
 				const $homeSectionInner = $('.home-section-container .section-inner');
 
+				function startEntryAnimation() {
+					$entryCover.css('transform', 'translateY(0)');
+					$headerLogo.css('transform', 'translateY(0)');
+				}
+				function completeEntryAnimation() {
+					$entryCover.css('z-index', 50);
+					$sectionContainers.show();
+					$homeSectionInner.removeClass('is-hidden');
+				}
+
+				// welcome words animations
 				const welcomeWords = [
 					'beautiful', 'curious', 'free', 'kindred', 'timeless', 'open', 'eclectic', 'sacred', 'gentle'
 				];
@@ -556,6 +716,11 @@
 				let $activeWelcomeWord = $welcomeWords[welcomeWordIndex];
 				$activeWelcomeWord.addClass('is-preactive is-active');
 
+				function prepareWelcomWordAnimation() {
+					$welcomeWordFollower.css('transform', `translateX(${$activeWelcomeWord.width()}px)`);
+					$welcomeWordsContainer.click(updateWelcomeWord);
+				}
+
 				function updateWelcomeWord() {
 					welcomeWordIndex = (welcomeWordIndex + 1) % $welcomeWords.length;
 					$prevWelcomeWord && $prevWelcomeWord.removeClass('is-preactive is-active is-prev');
@@ -569,18 +734,104 @@
 					}, 200);
 				}
 
+				// obfuscate contact details
+				function setContactsContent() {
+					const $linksContainer = $('#links-container')
+					const $linkInstagram = $('#link-instagram');
+					const $linkTelegram = $('#link-telegram');
+					const $linkEmail = $('#link-email');
+					const $linkDisplay = $('#link-display');
+					const contentInstagram = ['t', 'c', 'c', '.', 'm', 'a', 'd', 'r', 'i', 'd'].join('');
+					const contentTelegram = ['t', 'e', 'l', 'e', 'g', 'r', 'a', 'm'].join('');
+					const contentEmail = ['h', 'e', 'l', 'l', 'o', '<span class="contact-at">&#64;</span>', 'c', 'o', 'n', 's', 'c', 'i', 'o', 'u', 's', '.', 'm', 'a', 'd', 'r', 'i', 'd'].join('');
+
+					const linkHrefs = [
+						`https://instagram.com/${contentInstagram}`,
+						`./${contentTelegram}`,
+						'#section-connect-with-us',
+					];
+					const linkTexts = [
+						`<span class="contact-at">@</span>${contentInstagram}`,
+						`conscious.madrid/${contentTelegram}`,
+						contentEmail,
+					];
+
+					[$linkInstagram, $linkTelegram, $linkEmail].forEach(($el, index) => {
+						$el.attr('href', linkHrefs[index]).append(`<span class="link-text">${linkTexts[index]}</span>`);
+						$el.on('mouseenter', () => {
+							// $linksContainer.addClass(`hover-${index}`);
+							$linkDisplay.html(linkTexts[index]).addClass('is-visible');
+						});
+						$el.on('mouseleave', () => {
+							// $linksContainer.removeClass(`hover-${index}`);
+							$linkDisplay.html('&nbsp;').removeClass('is-visible');
+						});
+					});
+				}
+
+				// handle form
+				function handleNewsletterForm() {
+					const postDest = 'https://docs.google.com/forms/d/e/1FAIpQLSdbtpmOC0Cp00TtcvSS2V-8XHEgaBnqZsLvAuHEtrvd8WGC6Q/formResponse';
+  			  const postKeyName = 'entry.1279542721';
+					const postKeyEmail = 'entry.1159996573';
+					const $newsletterForm = $('#newsletter-form');
+					const $newsletterErrorMessage = $('#newsletter-error-message');
+					const $newsletterName = $('#newsletter-name');
+					const $newsletterEmail = $('#newsletter-email');
+
+					let isFormInSubmission = false; // prevent double submit
+					$newsletterForm.on('submit', (evt) => {
+						evt.preventDefault();
+
+						if (isFormInSubmission) return;
+						isFormInSubmission = true;
+
+						const nameVal = $newsletterName.val();
+						if (!nameVal) {
+							$newsletterErrorMessage
+								.text('Oops, we\'re missing your name.').show();
+							isFormInSubmission = false;
+							return;
+						}
+						const emailVal = $newsletterEmail.val();
+						if (!emailVal) {
+							$newsletterErrorMessage
+								.text('Oops, we\'re missing your email.').show();
+							isFormInSubmission = false;
+							return;
+						}
+
+						const formData  = new FormData();
+						formData.append(postKeyName, nameVal);
+						formData.append(postKeyEmail, emailVal);
+						fetch(postDest, {
+							method: 'POST',
+							mode: 'no-cors',
+							body: formData,
+							headers: {
+								// 'Content-Type': 'multipart/form-data;',
+							}
+						}).then(() => {
+							$newsletterForm.addClass('has-submitted');
+						}).catch((err) => {
+							$newsletterErrorMessage
+								.text('Something went wrong 😯... please try again?')
+								.addClass('has-error')
+								.show();
+							isFormInSubmission = false;
+						});
+					});
+				}
+
 				setTimeout(function() {
-					$welcomeWordFollower.css('transform', `translateX(${$activeWelcomeWord.width()}px)`);
-					$entryCover.css('transform', 'translateY(0)');
-					$headerLogo.css('transform', 'translateY(0)');
+					startEntryAnimation();
+					prepareWelcomWordAnimation();
 				}, 1000);
 
 				setTimeout(function() {
-					$entryCover.css('z-index', 50);
-					$sectionContainers.show();
-					$homeSectionInner.removeClass('is-hidden');
-					$welcomeWordsContainer.click(updateWelcomeWord);
-
+					completeEntryAnimation();
+					setContactsContent();
+					handleNewsletterForm();
 					setInterval(updateWelcomeWord, 5000);
 				}, 2800);
 
@@ -673,12 +924,52 @@
 				</div>
 			</div>
 
-			<div class="section-inner" style="height: 300px">
+			<div class="section-inner">
 				<div class="section-content">
 					<h2 class="section-title" id="section-connect-with-us">Connect With Us</h2>
-					<p>
-						Coming soon... 🫂
-					</p>
+					<div class="content-connect-with-us">
+						<!-- <p>
+							In the myriads of modern ways... ✨
+						</p> -->
+						<p id="links-container">
+							<a href="#" class="connect-link" id="link-instagram" target="_blank">
+								<span class="link-icon"></span>
+							</a>
+							<a href="#" class="connect-link" id="link-telegram" target="_blank">
+								<span class="link-icon"></span>
+							</a>
+							<a href="#" class="connect-link" id="link-email">
+								<span class="link-icon"></span>
+							</a>
+						</p>
+						<p>
+							<a href="#" id="link-display" class="focus-link">&nbsp;</a>
+						</p>
+						<p class="newsletter-intro">
+							Or join <b>72</b> others receiving The Conscious Collective newsletter:
+						</p>
+						<form id="newsletter-form">
+							<div class="icon-check"></div>
+							<div class="newsletter-form-inner">
+								<p id="newsletter-error-message"></p>
+								<input
+									type="text"
+									name="name"
+									placeholder="Name"
+									class="newsletter-input-text"
+									id="newsletter-name"
+								/>
+								<input
+									type="text"
+									name="email"
+									placeholder="Email"
+									class="newsletter-input-text"
+									id="newsletter-email"
+								/>
+								<input type="submit" id="newsletter-submit" value="Subscribe" />
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -694,7 +985,7 @@
 					<div class="content-about-us">
 						<img src="./assets/about-us.jpg" id="about-us-img" />
 						<p>
-							The Conscious Collective started as a small group of friends, all international residents, psychedelic explorers, living in Madrid.
+							The Conscious Collective was founded by a small group of friends, all international residents, psychedelic explorers, living in Madrid.
 						</p>
 						<p>
 							We wanted to play, and to experiment
@@ -714,13 +1005,13 @@
 						<p>&nbsp;</p>
 						<p>
 							If you too, empathize,<br/>
-							come join us, metamorphosize. 🌈
+							come <a href="#section-connect-with-us">join us</a>, metamorphosize. 🌈
 						</p>
 					</div>
 				</div>
 			</div>
 
-			<div class="footer-message">
+			<!-- <div class="footer-message">
 				<div class="section-inner">
 					<div class="section-content" style="padding-bottom: 0;">
 						<p>
@@ -730,7 +1021,7 @@
 						</p>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</body>
 </html>
