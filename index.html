@@ -571,7 +571,7 @@
 			}
 			.newsletter-input-text, #newsletter-submit {
 				display: block;
-				margin: 0 auto 0.5em;
+				margin: 0 auto 0.75em;
 				border: 1px solid #ccc;
 				padding: 0 1.25em;
 				font-family: Raleway;
@@ -656,8 +656,11 @@
 					animation: none;
 				}
 
-				.content-connect-with-us {
+				#links-container {
 					text-align: left;
+				}
+				#link-display {
+					display: none;
 				}
 				.connect-link {
 					width: auto;
@@ -676,8 +679,8 @@
 					margin-left: 5px;
 					font-size: 14pt;
 				}
-				#link-display, .newsletter-intro, #newsletter-form {
-					display: none;
+				.newsletter-input-text {
+					width: 80%;
 				}
 
 				#about-us-img {
@@ -793,14 +796,14 @@
 						const nameVal = $newsletterName.val();
 						if (!nameVal) {
 							$newsletterErrorMessage
-								.text('Oops, we still need a name.').show();
+								.text('Oops, missing name.').show();
 							isFormInSubmission = false;
 							return;
 						}
 						const emailVal = $newsletterEmail.val();
 						if (!emailVal) {
 							$newsletterErrorMessage
-								.text('Oops, we still need an email.').show();
+								.text('Oops, missing email.').show();
 							isFormInSubmission = false;
 							return;
 						}
