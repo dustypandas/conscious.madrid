@@ -844,6 +844,11 @@
 					});
 				}
 
+				$footerYear = $('#footer__year');
+				function setFooterContent() {
+					$footerYear.text((new Date()).getFullYear());
+				}
+
 				// handle form
 				function handleNewsletterForm() {
 					const postDest = 'https://docs.google.com/forms/d/e/1FAIpQLSdbtpmOC0Cp00TtcvSS2V-8XHEgaBnqZsLvAuHEtrvd8WGC6Q/formResponse';
@@ -909,6 +914,7 @@
 					completeEntryAnimation();
 					setEventsContent({ eventsData, dateNow, dayjs });
 					setContactsContent();
+					setFooterContent();
 					handleNewsletterForm();
 					setInterval(updateWelcomeWord, 5000);
 				}, 2800);
@@ -1134,17 +1140,18 @@
 				</div>
 			</div>
 
-			<!-- <div class="footer-message">
+			<div class="footer-message">
 				<div class="section-inner">
 					<div class="section-content" style="padding-bottom: 0;">
 						<p>
-							This project (and our community) is an ongoing work in progress - 🙏
-							<a href="#section-connect-with-us">please reach out</a>
-							if you would like to help!
+							&#169; <span id="footer__year"></span> - Made with 💚
 						</p>
+						<!-- <p>
+							&#169; <span id="footer__year"></span> - part of <a href="https://curious.madrid" target="_blank">Curious Communities</a>
+						</p> -->
 					</div>
 				</div>
-			</div> -->
+			</div>
 		</div>
 	</body>
 </html>
