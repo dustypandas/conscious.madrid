@@ -13,6 +13,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Amarante&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 		<style>
 			html, body {
 				margin: 0;
@@ -267,7 +268,8 @@
 				height: 0;
 				overflow: visible;
 			}
-			.bg-image, .bg-image-cover {
+			.bg-image,
+			.bg-image-cover {
 				position: absolute;
 				width: 100vw;
 				height: 100vh;
@@ -285,6 +287,10 @@
 			.bg-hero .bg-image, .bg-hero .bg-image-cover {
 				/* height: calc(100vh - 10px); */
 				height: 100vh;
+			}
+			.bg-image.bg-blue,
+			.bg-image.bg-purple {
+				height: 100%;
 			}
 
 			.entry-cover {
@@ -374,18 +380,11 @@
 				display: none;
 			}
 
-			.home-section-container {
-				display: block;
-			}
-			.home-section-container .section-inner {
-				padding-top: 220px; /* little less than logo */
-				transition: opacity 1.2s ease-out, transform 1.2s ease-out;
-			}
-			.home-section-container .section-inner.is-hidden {
-				opacity: 0;
-			}
-			.home-section-container p {
-				font-size: 16pt;
+			.section-title {
+				font-family: Amarante;
+				font-size: 24pt;
+				font-weight: normal;
+				padding: 1em 0;
 			}
 
 			.section-inner {
@@ -422,6 +421,22 @@
 			.focus-link:hover {
 				animation: shake 1.2s infinite;
 			}
+
+			/* landing section */
+			.home-section-container {
+				display: block;
+			}
+			.home-section-container .section-inner {
+				padding-top: 220px; /* little less than logo */
+				transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+			}
+			.home-section-container .section-inner.is-hidden {
+				opacity: 0;
+			}
+			.home-section-container p {
+				font-size: 16pt;
+			}
+
 			#welcome-words {
 				display: inline-block;
 				position: relative;
@@ -465,13 +480,59 @@
 				opacity: 0;
 			}
 
-			.section-title {
+			/* events section */
+			#events-container {
+				border-top: 1px solid rgba(255, 255, 255, 0.3);
+			}
+			.event-item {
+				display: block;
+				position: relative;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+				padding-top: 1em;
+				padding-bottom: 1em;
+				cursor: pointer;
+			}
+			.event-item:hover {
+				background: rgba(255, 255, 255, 0.1);
+			}
+			.event-item--empty {
+				padding-top: 1em;
+				padding-bottom: 1em;
+			}
+			.event-item__img {
+				display: block;
+				width: 40%;
+				float: left;
+				margin-top: 0.5em;
+				margin-right: 1.5em;
+			}
+			.event-item__content-container {
+				font-size: 12pt;
+			}
+			.event-item__title {
 				font-family: Amarante;
-				font-size: 24pt;
-				font-weight: normal;
-				padding: 1em 0;
+				font-size: 1.5em;
+				line-height: 1.3em;
+			}
+			.event-item__datetime,
+			.event-item__location {
+				line-height: 2em;
+				color: #d1d5db; /* 0.8 opacity */
+			}
+			.event-item__description {
+				display: -webkit-box;
+				line-clamp: 3;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				color: #d1d5db; /* 0.8 opacity */
+			}
+			.event-item__clear {
+				clear: both;
 			}
 
+			/* contact section */
 			.content-connect-with-us {
 				text-align: center;
 			}
@@ -656,6 +717,12 @@
 					animation: none;
 				}
 
+				.event-item__img {
+					float: none;
+					margin: 0 0 1em;
+					width: 100%;
+				}
+
 				#links-container {
 					text-align: left;
 				}
@@ -663,6 +730,7 @@
 					display: none;
 				}
 				.connect-link {
+					display: block;
 					width: auto;
 					margin: 10px 0;
 				}
@@ -836,22 +904,70 @@
 				}, 1000);
 
 				setTimeout(function() {
+					const dateNow = new Date();
+
 					completeEntryAnimation();
+					setEventsContent({ eventsData, dateNow, dayjs });
 					setContactsContent();
 					handleNewsletterForm();
 					setInterval(updateWelcomeWord, 5000);
 				}, 2800);
 
-			// jiggling words
-			// 	$focusLinks = $('.focus-link');
-			// 	$activeLink = $focusLinks.eq(0);
+				const $eventsContainer = $('#events-container');
+				function setEventsContent({ eventsData, dateNow, dayjs }) {
+					function eventDataToHtml(eventData) {
+						const dateStart = dayjs(eventData.dateStartString);
 
-			// 	setInterval(function() {
-			// 		$activeLink.removeClass('is-active');
-			// 		$activeLink = $focusLinks.eq(Math.floor(Math.random() * $focusLinks.length));
-			// 		$activeLink.addClass('is-active');
-			// 	}, 2000);
+						return `<a class="event-item" href="${eventData.linkUrl}" target="_blank">
+							<img class="event-item__img" src="${eventData.imageUrl}" />
+							<div class="event-item__content-container">
+								<div class="event-item__title">${eventData.title}</div>
+								<div class="event-item__datetime">&nbsp;&nbsp;📆&nbsp;&nbsp;${dateStart.format('ddd MMM DD, H:mm A')}</div>
+								<div class="event-item__location">&nbsp;&nbsp;📍&nbsp;&nbsp;${eventData.location}</div>
+								<div class="event-item__description">${eventData.description.map(line => `${line}`).join(' ')}</div>
+							</div>
+							<div class="event-item__clear"></div>
+						</a>`;
+					}
+
+					const dateNowString = dayjs(dateNow).format('YYYY-MM-DDTHH:mm:ss');
+					const htmlContent = eventsData
+						.filter(eventData => eventData.dateStartString > dateNowString)
+						.sort((a, b) => a.dateStartString.localeCompare(b.dateStartString))
+						.slice(0, 3)
+						.map(eventDataToHtml)
+						.join('') || '<div class="event-item--empty">Coming soon... 🪘✨</div>';
+
+					$eventsContainer.html(htmlContent);
+				}
 			});
+
+			const eventsData = [
+			  {
+					imageUrl: './content/psychedelic-stories.webp',
+					linkUrl: 'https://www.meetup.com/conscious-madrid/events/304216098/',
+					title: 'Psychedelic Stories: Experiences From The Other Side',
+					dateStartString: '2024-11-18T19:10',
+					location: 'Palacio',
+					description: [
+						'Curious about Psychedelics but unsure where to begin? Or perhaps you\'re an experienced psychonaut seeking to connect with others on a similar path?',
+						'This evening is a chance to meet others in <b>The Conscious Collective</b> community of open-minded adventurers and explorers, living in Madrid.',
+						'Join us for a series of <b>personal psychedelic stories</b>, shared by facilitators, explorers, and members of our community.',
+					],
+			  },
+				{
+					imageUrl: './content/psychedelic-stories.webp',
+					linkUrl: 'https://www.meetup.com/conscious-madrid/events/304216157/',
+					title: 'Psychedelic Stories: Transformations & Healing',
+					dateStartString: '2024-12-04T19:10',
+					location: 'Palacio',
+					description: [
+						'Curious about Psychedelics but unsure where to begin? Or perhaps you\'re an experienced psychonaut seeking to connect with others on a similar path?',
+						'This evening is a chance to meet others in <b>The Conscious Collective</b> community of open-minded adventurers and explorers, living in Madrid.',
+						'Join us for a series of <b>personal psychedelic stories</b>, shared by facilitators, explorers, and members of our community.',
+					],
+			  },
+			];
 		</script>
 	</head>
 	<body>
@@ -914,10 +1030,10 @@
 				<div class="bg-image bg-blue"></div>
 			</div>
 
-			<div class="section-inner" style="height: 300px">
+			<div class="section-inner">
 				<div class="section-content">
 					<h2 class="section-title" id="section-public-events">Public Events</h2>
-					<p>
+					<p id="events-container">
 						Coming soon... 🪘
 					</p>
 				</div>
@@ -1007,7 +1123,7 @@
 							...a community colourful and fulfilled
 						</p>
 						<p>
-							...for people just like ourselves, gleeful.
+							...for people just like ourselves, gleeful elves.
 						</p>
 						<p>&nbsp;</p>
 						<p>
