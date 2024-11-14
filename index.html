@@ -789,6 +789,7 @@
 					.map((word) => $(`<span class="welcome-word">${word}</span>`));
 				$welcomeWordsContainer.append($welcomeWords, '&nbsp;');
 
+				let updateWelcomeWordInterval = null;
 				let welcomeWordIndex = 0;
 				let $prevWelcomeWord = null;
 				let $activeWelcomeWord = $welcomeWords[welcomeWordIndex];
@@ -796,7 +797,11 @@
 
 				function prepareWelcomWordAnimation() {
 					$welcomeWordFollower.css('transform', `translateX(${$activeWelcomeWord.width()}px)`);
-					$welcomeWordsContainer.click(updateWelcomeWord);
+					$welcomeWordsContainer.click(() => {
+						clearInterval(updateWelcomeWordInterval);
+						updateWelcomeWord();
+						startWelcomWordAnimation();
+					});
 				}
 
 				function updateWelcomeWord() {
@@ -810,6 +815,10 @@
 					setTimeout(function() {
 						$activeWelcomeWord.addClass('is-active');
 					}, 200);
+				}
+
+				function startWelcomWordAnimation() {
+					updateWelcomeWordInterval = setInterval(updateWelcomeWord, 5000);
 				}
 
 				// obfuscate contact details
@@ -919,7 +928,7 @@
 					setContactsContent();
 					setFooterContent();
 					handleNewsletterForm();
-					setInterval(updateWelcomeWord, 5000);
+					startWelcomWordAnimation();
 				}, 2800);
 
 				const $eventsContainer = $('#events-container');
