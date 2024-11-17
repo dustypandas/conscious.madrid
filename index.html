@@ -761,232 +761,6 @@
 				}
 			}
 		</style>
-		<script type="text/javascript">
-			$(function () {
-				// entry animations
-				const $entryCover = $('.entry-cover');
-				const $headerLogo = $('.header-logo');
-				const $sectionContainers = $('.section-container');
-				const $homeSectionInner = $('.home-section-container .section-inner');
-
-				function startEntryAnimation() {
-					$entryCover.css('transform', 'translateY(0)');
-					$headerLogo.css('transform', 'translateY(0)');
-				}
-				function completeEntryAnimation() {
-					$entryCover.css('z-index', 50);
-					$sectionContainers.show();
-					$homeSectionInner.removeClass('is-hidden');
-				}
-
-				// welcome words animations
-				const welcomeWords = [
-					'beautiful', 'curious', 'free', 'kindred', 'timeless', 'open', 'eclectic', 'sacred', 'gentle'
-				];
-				const $welcomeWordsContainer = $('#welcome-words');
-				const $welcomeWordFollower = $('#welcome-word-follower');
-				const $welcomeWords = welcomeWords
-					.map((word) => $(`<span class="welcome-word">${word}</span>`));
-				$welcomeWordsContainer.append($welcomeWords, '&nbsp;');
-
-				let updateWelcomeWordInterval = null;
-				let welcomeWordIndex = 0;
-				let $prevWelcomeWord = null;
-				let $activeWelcomeWord = $welcomeWords[welcomeWordIndex];
-				$activeWelcomeWord.addClass('is-preactive is-active');
-
-				function prepareWelcomWordAnimation() {
-					$welcomeWordFollower.css('transform', `translateX(${$activeWelcomeWord.width()}px)`);
-					$welcomeWordsContainer.click(() => {
-						clearInterval(updateWelcomeWordInterval);
-						updateWelcomeWord();
-						startWelcomWordAnimation();
-					});
-				}
-
-				function updateWelcomeWord() {
-					welcomeWordIndex = (welcomeWordIndex + 1) % $welcomeWords.length;
-					$prevWelcomeWord && $prevWelcomeWord.removeClass('is-preactive is-active is-prev');
-					$prevWelcomeWord = $activeWelcomeWord;
-					$prevWelcomeWord.addClass('is-prev');
-					$activeWelcomeWord = $welcomeWords[welcomeWordIndex];
-					$activeWelcomeWord.addClass('is-preactive');
-					$welcomeWordFollower.css('transform', `translateX(${$activeWelcomeWord.width()}px)`);
-					setTimeout(function() {
-						$activeWelcomeWord.addClass('is-active');
-					}, 200);
-				}
-
-				function startWelcomWordAnimation() {
-					updateWelcomeWordInterval = setInterval(updateWelcomeWord, 5000);
-				}
-
-				// obfuscate contact details
-				function setContactsContent() {
-					const $linksContainer = $('#links-container')
-					const $linkInstagram = $('#link-instagram');
-					const $linkTelegram = $('#link-telegram');
-					const $linkEmail = $('#link-email');
-					const $linkDisplay = $('#link-display');
-					const contentInstagram = ['t', 'c', 'c', '.', 'm', 'a', 'd', 'r', 'i', 'd'].join('');
-					const contentTelegram = ['t', 'e', 'l', 'e', 'g', 'r', 'a', 'm'].join('');
-					const contentEmail = ['h', 'e', 'l', 'l', 'o', '<span class="contact-at">&#64;</span>', 'c', 'o', 'n', 's', 'c', 'i', 'o', 'u', 's', '.', 'm', 'a', 'd', 'r', 'i', 'd'].join('');
-
-					const linkHrefs = [
-						`https://instagram.com/${contentInstagram}`,
-						`./${contentTelegram}`,
-						'#connect-with-us',
-					];
-					const linkTexts = [
-						`<span class="contact-at">@</span>${contentInstagram}`,
-						`conscious.madrid/${contentTelegram}`,
-						contentEmail,
-					];
-
-					[$linkInstagram, $linkTelegram, $linkEmail].forEach(($el, index) => {
-						$el.attr('href', linkHrefs[index]).append(`<span class="link-text">${linkTexts[index]}</span>`);
-						$el.on('mouseenter', () => {
-							// $linksContainer.addClass(`hover-${index}`);
-							$linkDisplay.html(linkTexts[index]).addClass('is-visible');
-						});
-						$el.on('mouseleave', () => {
-							// $linksContainer.removeClass(`hover-${index}`);
-							$linkDisplay.html('&nbsp;').removeClass('is-visible');
-						});
-					});
-				}
-
-				$footerYear = $('#footer__year');
-				function setFooterContent() {
-					$footerYear.text((new Date()).getFullYear());
-				}
-
-				// handle form
-				function handleNewsletterForm() {
-					const postDest = 'https://docs.google.com/forms/d/e/1FAIpQLSdbtpmOC0Cp00TtcvSS2V-8XHEgaBnqZsLvAuHEtrvd8WGC6Q/formResponse';
-  			  const postKeyName = 'entry.1279542721';
-					const postKeyEmail = 'entry.1159996573';
-					const $newsletterForm = $('#newsletter-form');
-					const $newsletterErrorMessage = $('#newsletter-error-message');
-					const $newsletterName = $('#newsletter-name');
-					const $newsletterEmail = $('#newsletter-email');
-
-					let isFormInSubmission = false; // prevent double submit
-					$newsletterForm.on('submit', (evt) => {
-						evt.preventDefault();
-
-						if (isFormInSubmission) return;
-						isFormInSubmission = true;
-
-						const nameVal = $newsletterName.val();
-						if (!nameVal) {
-							$newsletterErrorMessage
-								.text('Oops, missing name.').show();
-							isFormInSubmission = false;
-							return;
-						}
-						const emailVal = $newsletterEmail.val();
-						if (!emailVal) {
-							$newsletterErrorMessage
-								.text('Oops, missing email.').show();
-							isFormInSubmission = false;
-							return;
-						}
-
-						const formData  = new FormData();
-						formData.append(postKeyName, nameVal);
-						formData.append(postKeyEmail, emailVal);
-						fetch(postDest, {
-							method: 'POST',
-							mode: 'no-cors',
-							body: formData,
-							headers: {
-								// 'Content-Type': 'multipart/form-data;',
-							}
-						}).then(() => {
-							$newsletterForm.addClass('has-submitted');
-						}).catch((err) => {
-							$newsletterErrorMessage
-								.text('Something went wrong 😯... please try again?')
-								.addClass('has-error')
-								.show();
-							isFormInSubmission = false;
-						});
-					});
-				}
-
-				setTimeout(function() {
-					startEntryAnimation();
-					prepareWelcomWordAnimation();
-				}, 1000);
-
-				setTimeout(function() {
-					const dateNow = new Date();
-
-					completeEntryAnimation();
-					setEventsContent({ eventsData, dateNow, dayjs });
-					setContactsContent();
-					setFooterContent();
-					handleNewsletterForm();
-					startWelcomWordAnimation();
-				}, 2800);
-
-				const $eventsContainer = $('#events-container');
-				function setEventsContent({ eventsData, dateNow, dayjs }) {
-					function eventDataToHtml(eventData) {
-						const dateStart = dayjs(eventData.dateStartString);
-
-						return `<a class="event-item" href="${eventData.linkUrl}" target="_blank">
-							<img class="event-item__img" src="${eventData.imageUrl}" />
-							<div class="event-item__content-container">
-								<div class="event-item__title">${eventData.title}</div>
-								<div class="event-item__datetime">&nbsp;&nbsp;📆&nbsp;&nbsp;${dateStart.format('ddd MMM DD, H:mm A')}</div>
-								<div class="event-item__location">&nbsp;&nbsp;📍&nbsp;&nbsp;${eventData.location}</div>
-								<div class="event-item__description">${eventData.description.map(line => `${line}`).join(' ')}</div>
-							</div>
-							<div class="event-item__clear"></div>
-						</a>`;
-					}
-
-					const dateNowString = dayjs(dateNow).format('YYYY-MM-DDTHH:mm:ss');
-					const htmlContent = eventsData
-						.filter(eventData => eventData.dateStartString > dateNowString)
-						.sort((a, b) => a.dateStartString.localeCompare(b.dateStartString))
-						.slice(0, 3)
-						.map(eventDataToHtml)
-						.join('') || '<div class="event-item--empty">Coming soon... 🪘✨</div>';
-
-					$eventsContainer.html(htmlContent);
-				}
-			});
-
-			const eventsData = [
-			  {
-					imageUrl: './content/psychedelic-stories.webp',
-					linkUrl: 'https://www.meetup.com/conscious-madrid/events/304216098/',
-					title: 'Psychedelic Stories: Experiences From The Other Side',
-					dateStartString: '2024-11-27T19:10',
-					location: 'Palacio',
-					description: [
-						'Curious about Psychedelics but unsure where to begin? Or perhaps you\'re an experienced psychonaut seeking to connect with others on a similar path?',
-						'This evening is a chance to meet others in <b>The Conscious Collective</b> community of open-minded adventurers and explorers, living in Madrid.',
-						'Join us for a series of <b>personal psychedelic stories</b>, shared by facilitators, explorers, and members of our community.',
-					],
-			  },
-				{
-					imageUrl: './content/psychedelic-stories.webp',
-					linkUrl: 'https://www.meetup.com/conscious-madrid/events/304216157/',
-					title: 'Psychedelic Stories: Transformations & Healing',
-					dateStartString: '2024-12-11T19:10',
-					location: 'Palacio',
-					description: [
-						'Curious about Psychedelics but unsure where to begin? Or perhaps you\'re an experienced psychonaut seeking to connect with others on a similar path?',
-						'This evening is a chance to meet others in <b>The Conscious Collective</b> community of open-minded adventurers and explorers, living in Madrid.',
-						'Join us for a series of <b>personal psychedelic stories</b>, shared by facilitators, explorers, and members of our community.',
-					],
-			  },
-			];
-		</script>
 	</head>
 	<body>
 		<div class="bg-light-container">
@@ -1165,5 +939,206 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="./content/events-data.js"></script>
+		<script type="text/javascript">
+			$(function () {
+				// entry animations
+				const $entryCover = $('.entry-cover');
+				const $headerLogo = $('.header-logo');
+				const $sectionContainers = $('.section-container');
+				const $homeSectionInner = $('.home-section-container .section-inner');
+
+				function startEntryAnimation() {
+					$entryCover.css('transform', 'translateY(0)');
+					$headerLogo.css('transform', 'translateY(0)');
+				}
+				function completeEntryAnimation() {
+					$entryCover.css('z-index', 50);
+					$sectionContainers.show();
+					$homeSectionInner.removeClass('is-hidden');
+				}
+
+				// welcome words animations
+				const welcomeWords = [
+					'beautiful', 'curious', 'free', 'kindred', 'timeless', 'open', 'eclectic', 'sacred', 'gentle'
+				];
+				const $welcomeWordsContainer = $('#welcome-words');
+				const $welcomeWordFollower = $('#welcome-word-follower');
+				const $welcomeWords = welcomeWords
+					.map((word) => $(`<span class="welcome-word">${word}</span>`));
+				$welcomeWordsContainer.append($welcomeWords, '&nbsp;');
+
+				let updateWelcomeWordInterval = null;
+				let welcomeWordIndex = 0;
+				let $prevWelcomeWord = null;
+				let $activeWelcomeWord = $welcomeWords[welcomeWordIndex];
+				$activeWelcomeWord.addClass('is-preactive is-active');
+
+				function prepareWelcomWordAnimation() {
+					$welcomeWordFollower.css('transform', `translateX(${$activeWelcomeWord.width()}px)`);
+					$welcomeWordsContainer.click(() => {
+						clearInterval(updateWelcomeWordInterval);
+						updateWelcomeWord();
+						startWelcomWordAnimation();
+					});
+				}
+
+				function updateWelcomeWord() {
+					welcomeWordIndex = (welcomeWordIndex + 1) % $welcomeWords.length;
+					$prevWelcomeWord && $prevWelcomeWord.removeClass('is-preactive is-active is-prev');
+					$prevWelcomeWord = $activeWelcomeWord;
+					$prevWelcomeWord.addClass('is-prev');
+					$activeWelcomeWord = $welcomeWords[welcomeWordIndex];
+					$activeWelcomeWord.addClass('is-preactive');
+					$welcomeWordFollower.css('transform', `translateX(${$activeWelcomeWord.width()}px)`);
+					setTimeout(function() {
+						$activeWelcomeWord.addClass('is-active');
+					}, 200);
+				}
+
+				function startWelcomWordAnimation() {
+					updateWelcomeWordInterval = setInterval(updateWelcomeWord, 5000);
+				}
+
+				// obfuscate contact details
+				function setContactsContent() {
+					const $linksContainer = $('#links-container')
+					const $linkInstagram = $('#link-instagram');
+					const $linkTelegram = $('#link-telegram');
+					const $linkEmail = $('#link-email');
+					const $linkDisplay = $('#link-display');
+					const contentInstagram = ['t', 'c', 'c', '.', 'm', 'a', 'd', 'r', 'i', 'd'].join('');
+					const contentTelegram = ['t', 'e', 'l', 'e', 'g', 'r', 'a', 'm'].join('');
+					const contentEmail = ['h', 'e', 'l', 'l', 'o', '<span class="contact-at">&#64;</span>', 'c', 'o', 'n', 's', 'c', 'i', 'o', 'u', 's', '.', 'm', 'a', 'd', 'r', 'i', 'd'].join('');
+
+					const linkHrefs = [
+						`https://instagram.com/${contentInstagram}`,
+						`./${contentTelegram}`,
+						'#connect-with-us',
+					];
+					const linkTexts = [
+						`<span class="contact-at">@</span>${contentInstagram}`,
+						`conscious.madrid/${contentTelegram}`,
+						contentEmail,
+					];
+
+					[$linkInstagram, $linkTelegram, $linkEmail].forEach(($el, index) => {
+						$el.attr('href', linkHrefs[index]).append(`<span class="link-text">${linkTexts[index]}</span>`);
+						$el.on('mouseenter', () => {
+							// $linksContainer.addClass(`hover-${index}`);
+							$linkDisplay.html(linkTexts[index]).addClass('is-visible');
+						});
+						$el.on('mouseleave', () => {
+							// $linksContainer.removeClass(`hover-${index}`);
+							$linkDisplay.html('&nbsp;').removeClass('is-visible');
+						});
+					});
+				}
+
+				$footerYear = $('#footer__year');
+				function setFooterContent() {
+					$footerYear.text((new Date()).getFullYear());
+				}
+
+				// handle form
+				function handleNewsletterForm() {
+					const postDest = 'https://docs.google.com/forms/d/e/1FAIpQLSdbtpmOC0Cp00TtcvSS2V-8XHEgaBnqZsLvAuHEtrvd8WGC6Q/formResponse';
+  			  const postKeyName = 'entry.1279542721';
+					const postKeyEmail = 'entry.1159996573';
+					const $newsletterForm = $('#newsletter-form');
+					const $newsletterErrorMessage = $('#newsletter-error-message');
+					const $newsletterName = $('#newsletter-name');
+					const $newsletterEmail = $('#newsletter-email');
+
+					let isFormInSubmission = false; // prevent double submit
+					$newsletterForm.on('submit', (evt) => {
+						evt.preventDefault();
+
+						if (isFormInSubmission) return;
+						isFormInSubmission = true;
+
+						const nameVal = $newsletterName.val();
+						if (!nameVal) {
+							$newsletterErrorMessage
+								.text('Oops, missing name.').show();
+							isFormInSubmission = false;
+							return;
+						}
+						const emailVal = $newsletterEmail.val();
+						if (!emailVal) {
+							$newsletterErrorMessage
+								.text('Oops, missing email.').show();
+							isFormInSubmission = false;
+							return;
+						}
+
+						const formData  = new FormData();
+						formData.append(postKeyName, nameVal);
+						formData.append(postKeyEmail, emailVal);
+						fetch(postDest, {
+							method: 'POST',
+							mode: 'no-cors',
+							body: formData,
+							headers: {
+								// 'Content-Type': 'multipart/form-data;',
+							}
+						}).then(() => {
+							$newsletterForm.addClass('has-submitted');
+						}).catch((err) => {
+							$newsletterErrorMessage
+								.text('Something went wrong 😯... please try again?')
+								.addClass('has-error')
+								.show();
+							isFormInSubmission = false;
+						});
+					});
+				}
+
+				setTimeout(function() {
+					startEntryAnimation();
+					prepareWelcomWordAnimation();
+
+					// eventsData currently loaded through script (so works on 'file://'), maybe move to fetch in future;
+					const dateNow = new Date();
+					setEventsContent({ eventsData, dateNow, dayjs });
+				}, 1000);
+
+				setTimeout(function() {
+					completeEntryAnimation();
+					setContactsContent();
+					setFooterContent();
+					handleNewsletterForm();
+					startWelcomWordAnimation();
+				}, 2800);
+
+				const $eventsContainer = $('#events-container');
+				function setEventsContent({ eventsData, dateNow, dayjs }) {
+					function eventDataToHtml(eventData) {
+						const dateStart = dayjs(eventData.dateStartString);
+
+						return `<a class="event-item" href="${eventData.linkUrl}" target="_blank">
+							<img class="event-item__img" src="${eventData.imageUrl}" />
+							<div class="event-item__content-container">
+								<div class="event-item__title">${eventData.title}</div>
+								<div class="event-item__datetime">&nbsp;&nbsp;📆&nbsp;&nbsp;${dateStart.format('ddd MMM DD, H:mm A')}</div>
+								<div class="event-item__location">&nbsp;&nbsp;📍&nbsp;&nbsp;${eventData.location}</div>
+								<div class="event-item__description">${eventData.description.map(line => `${line}`).join(' ')}</div>
+							</div>
+							<div class="event-item__clear"></div>
+						</a>`;
+					}
+
+					const dateNowString = dayjs(dateNow).format('YYYY-MM-DDTHH:mm:ss');
+					const htmlContent = eventsData
+						.filter(eventData => eventData.dateStartString > dateNowString)
+						.sort((a, b) => a.dateStartString.localeCompare(b.dateStartString))
+						.slice(0, 3)
+						.map(eventDataToHtml)
+						.join('') || '<div class="event-item--empty">Coming soon... 🪘✨</div>';
+
+					$eventsContainer.html(htmlContent);
+				}
+			});
+		</script>
 	</body>
 </html>
